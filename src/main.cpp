@@ -86,11 +86,11 @@ int read_images(const fs::path& path, uint8_t label, vector<image>& images, int 
         if (fs::is_directory(p)) continue;
 
         image img;
-        cv::Mat srcimg = cv::imread(p.string(), cv::IMREAD_GRAYSCALE);
+        cv::Mat srcimg = cv::imread(p.string(), v::IMREAD_COLOR);
         if (srcimg.data == nullptr)
             continue;
 
-        cv::resize(srcimg, img.data, cv::Size(w, h)); // gray, linear interpolation
+        cv::resize(srcimg, img.data, cv::Size(w, h), 0, 0, CV_INTER_AREA); 
 
         //cv::imshow("data", img.data);
         //cv::waitKey(5);
